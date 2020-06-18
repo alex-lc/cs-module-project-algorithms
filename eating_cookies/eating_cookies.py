@@ -4,13 +4,33 @@ Returns: an integer
 '''
 
 
-def eating_cookies(n):
+# Day 1:
+# def eating_cookies(n):
+#     if n < 0:
+#         return 0
+#     elif n == 0:
+#         return 1
+#     else:
+#         return eating_cookies(n-3) + eating_cookies(n-2) + eating_cookies(n-1)
+
+
+# Day 2:
+def eating_cookies(n, cache={}):
+    # base cases
     if n < 0:
         return 0
-    elif n == 0:
+
+    if n == 0:
         return 1
+
+    # does n exist in our cache?
+    if cache and n in cache:
+        return cache[n]
     else:
-        return eating_cookies(n-3) + eating_cookies(n-2) + eating_cookies(n-1)
+        cache[n] = eating_cookies(
+            n-3) + eating_cookies(n-2) + eating_cookies(n-1)
+
+    return cache[n]
 
 
 if __name__ == "__main__":
